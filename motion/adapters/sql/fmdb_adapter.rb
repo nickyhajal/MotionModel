@@ -90,6 +90,7 @@ module MotionModel
 
     def initialize(name = nil, options = {})
       @name = name || 'fmdb.db'
+      @base_dir = options[:base_dir] || NSDocumentDirectory
       super(options)
       if options[:reset]
         NSFileManager.defaultManager.removeItemAtPath(db_path, error:nil)
@@ -135,7 +136,7 @@ module MotionModel
     private
 
     def db_path
-      File.join(NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0], @name)
+      File.join(NSSearchPathForDirectoriesInDomains(@base_dir, NSUserDomainMask, true)[0], @name)
     end
 
     def db
