@@ -80,6 +80,8 @@ module MotionModel
         %Q[#{column} <= #{value}]
       when :between, :in_range
         %Q[#{column} BETWEEN #{values.first} AND #{values.last}]
+      when :like
+        %Q[#{column} LIKE #{value}]
       end
     end
   end
